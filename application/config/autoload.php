@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array("database");
+$autoload['libraries'] = array("database", "session");	/*add thêm database là thư viện và session cho đăng nhập*/
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array("url");	/*nhận đường dẫn tuyệt đối*/
+$autoload['helper'] = array("url","file");	/*nhận đường dẫn tuyệt đối, thêm "file" nếu có hỗ trợ upload file*/
 
 /*
 | -------------------------------------------------------------------
