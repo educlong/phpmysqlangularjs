@@ -1,6 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*Xử lý upload hình ảnh lên, (hàm uploadImageAvatar để xử lý upload file) -> tạo thêm folder images để lưu trữ hình ảnh*/
-class MainEmployees extends CI_Controller {
+/*Tạo thư mục files để lưu file upload lên (ko sử dụng thư mục images như trước nữa)*/
+/*Đầu tiên, để page upload đc file => copy file UploadHandler.php trong jqueryuploadfile/server/php/UploadHandler.php vào application/controllers. Sau đó include file UploadHandler.php vào*/
+include 'UploadHandler.php';	/*include cho phép upload file*/
+
+class mainAjax extends CI_Controller {	/*Link truy cập để text: http://127.0.0.1:8888/phpBasic4/index.php/mainAjax*/
 
 	public function __construct()
 	{
@@ -14,31 +17,33 @@ class MainEmployees extends CI_Controller {
 
 	public function selectEmployees()
 	{
-		$this->load->model('mainModel');	/*sau khi load đc model thì truyền kq qua mainView*/
-		$this->load->view('mainView', 
+		$this->load->model('mainModel');/*sau khi load model thì truyền kq qua mainModel*/
+		$this->load->view('mainViewAjax', 
 			array("arrSelectAllEmployees" => $this->mainModel->selectEmployeesModel()));
 	}
 
-	public function insertEmployee()
-	{	/*lấy tên, tuổi, phone, linkfb, orders, avatar nhân viên đã đc nhập vào form*/
+	public function insertEmployeeProcessingInAjax()	/*xử lý insert employee trong ajax (button btnInsertEmp)*/
+	{	/*xử lý zống y chang insertEmployee, nhưng k xử lý file hình ảnh avatar đc*/
 		$this->load->model('mainModel');
-		if ($this->mainModel->insertEmployeeModel($this->input->post('nameEmployee'),
+		// if ($this->mainModel->checkNameEmployeeModel($this->input->post('nameEmployee'))) {/*nếu name tồn tại*/
+		// 	$this->updateEmployee(); /*thì chỉ cần update*/
+		// }
+		// else{	/*còn chưa tồn tại thì insert*/
+			if ($this->mainModel->insertEmployeeModel($this->input->post('nameEmployee'),
 												 $this->input->post('ageEmployee'),
 												 $this->input->post('phoneEmployee'),
-												 base_url()."images/".$this->uploadImageAvatar(),
+												 $this->input->post('avatarEmployee'),
 												 $this->input->post('ordersEmployee'),
-												 $this->input->post('linkfbEmployee'))) {
-			$this->load->view('insertupdatedeleteView');
-		}
-		else echo 'insert fail';
-		
+												 $this->input->post('linkfbEmployee')))
+				 echo 'insert success';
+			else echo 'insert fail';
+		// }
 	}
 
 	public function updateEmployeeOpening($idEmployee)
 	{
 		$this->load->model('mainModel');
-		$this->load->view('updateView', 
-		  array("updateEmployeeDetail"=> $this->mainModel->checkEmployeeModel($idEmployee)),FALSE);
+		$this->load->view('mainViewAjax', array("updateEmployeeDetail"=> $this->mainModel->checkEmployeeModel($idEmployee)),FALSE);
 	}
 
 	public function updateEmployee()
@@ -46,12 +51,9 @@ class MainEmployees extends CI_Controller {
 		$imgAvatarEmp = $this->uploadImageAvatar();
 
 		if ($imgAvatarEmp)  /*xử lý hình ảnh avatar, nếu có upload hình ảnh mới*/
-			$imgAvatarEmp = base_url()."images/".$this->uploadImageAvatar();
+			$imgAvatarEmp = base_url()."files/".$this->uploadImageAvatar();
 		else 				/*nếu k có thì zữ nguyên*/
-			$imgAvatarEmp =$this->input->post('avatarEmployeeNotChange');
-		echo '<pre>';
-		var_dump($imgAvatarEmp);
-		echo '</pre>';
+			$imgAvatarEmp = $this->input->post('avatarEmployeeNotChange');
 		$this->load->model('mainModel');
 		if ($this->mainModel->updateEmployeeModel($this->input->post('idEmployee'),
 											  $this->input->post('nameEmployee'),
@@ -76,10 +78,13 @@ class MainEmployees extends CI_Controller {
 		else echo 'delete fail';
 	}
 
+
+
+
 	public function uploadImageAvatar()
 	{
 		/*phần xử lý upload file*/
-		$target_dir = "images/";	/*đường dẫn file*/
+		$target_dir = "files/";	/*đường dẫn file*/
 		$target_file = $target_dir . basename($_FILES["avatarEmployee"]["name"]);
 		$uploadOk = 1;
 		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -129,7 +134,14 @@ class MainEmployees extends CI_Controller {
 		}
 		return basename($_FILES["avatarEmployee"]["name"]);
 	}
+
+
+	/*xử lý phần upload hình ảnh bằng ajax*/
+	public function uploadImageAvatarAjax()
+	{	
+		$uploadFile = new UploadHandler();
+	}
 }
 
-/* End of file MainEmployees.php */
-/* Location: ./application/controllers/MainEmployees.php */
+/* End of file mainAjax.php */
+/* Location: ./application/controllers/mainAjax.php */
