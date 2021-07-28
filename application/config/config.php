@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://127.0.0.1:8888/phpBasic4/';
+$config['base_url'] = 'http://127.0.0.1:8888/phpBasic4/';	/*kích hoạt base_url*/
 
 /*
 |--------------------------------------------------------------------------

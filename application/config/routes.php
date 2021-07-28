@@ -49,12 +49,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'AttributeHomejson';	/*chỉnh sửa để link đến controller*/
+$route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-/*Tùy biến đường dẫn thân thiện*/
-$route['menu/(:any)-(:num)'] = "AttributeHomejson/detailsMenu/$2/$1";
-	/*(:num)	-> bất kỳ number nào	-> thay bằng $2
-	  (:any)	-> bất kỳ chuỗi nào		-> thay bằng $1
-	  VD chuỗi link ban đầu: AttributeHomejson/detailsMenu/10/hoc081098 	-> đổi thành 	hoc081098-10*/
