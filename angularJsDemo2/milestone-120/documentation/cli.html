@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <!-- meta -->
+    <meta charset="utf-8">
+      <meta content="flat, clean, responsive, application frontend template built with bootstrap 3" name="description">
+        <meta content="width=device-width,initial-scale=1" name="viewport">
+          <!-- /meta -->
+          <title>
+            Documentation
+          </title>
+          <link href="styles/app.min.725970e8.css" rel="stylesheet">
+            <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+            <!-- load modernizer -->
+            <script src="vendor/modernizr.js">
+            </script>
+            <!-- body -->
+            <body>
+              <!-- page loading spinner -->
+              <div class="pageload">
+                <div class="loader">
+                </div>
+              </div>
+              <!-- /page loading spinner -->
+              <!-- menu navigation -->
+              <header class="header fixed-sticky">
+              <div class="container">
+                <nav class="heading-font">
+                  <!-- branding -->
+                  <div class="branding">
+                    <!-- toggle menu -->
+                    <button class="mobile-toggle" type="button">
+                      <span class="ti-menu">
+                      </span>
+                    </button>
+                    <!-- /toggle menu -->
+                    <a class="logo transition" href="index.html">
+                      Milestone
+                    </a>
+                  </div>
+                  <!-- /branding -->
+                  <!-- links -->
+                  <div class="navigation">
+                    <ul class="nav">
+                      <li class="hide">
+                        <a href="#top">
+                        </a>
+                      </li>
+                      <li>
+                        <a href="http://milestone.nyasha.me">
+                          Demo
+                        </a>
+                      </li>
+                      <li>
+                        <a href="http://themeforest.net/user/iamnyasha">
+                          Support
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- /links -->
+                </nav>
+              </div>
+            </header>
+              <!-- /menu navigation -->
+              <!-- how it works section -->
+              <section class="content-section" id="how">
+                <div class="container">
+                  <div class="columns">
+                    <div class="column w300">
+                      <h6 class="text-muted text-uppercase">
+                        Table of contents
+                      </h6>
+                      <ul class="list-unstyled toc">
+                        <li>
+                          <a href="index.html">
+                            <span>
+                              Getting Started
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="package-contents.html">
+                            <span>
+                              Package contents
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="cli.html">
+                            <span>
+                              Command line
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="layout-options.html">
+                            <span>
+                              Layout options
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="helpers.html">
+                            <span>
+                              Helpers
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="directives.html">
+                            <span>
+                              Directives
+                            </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="3rd.html">
+                            <span>
+                              Credits / 3rd party plugins
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                      <hr>
+                        <ul class="list-unstyled toc">
+                          <li>
+                            <a href="changelog.html">
+                              <span>
+                                Changelog
+                              </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </hr>
+                    </div>
+                    <div class="column bl">
+                      <h3 class="page-title">
+                        Command line tools (Optional)
+                      </h3>
+                      <p>
+                        The template is built on top of gulp and bower tools. Use of these tools is completely optional.
+                      </p>
+                      <h5 class="mt25">
+                        What is bower and gulp?
+                      </h5>
+                      <p>
+                        Gulp is the build system used to build and preview your project. Bower is a package manager is used for dependency management, so that you no longer have to manually download and manage your scripts.
+                      </p>
+                      <h5 class="mt25">
+                        Installing requirements
+                      </h5>
+                      <p>
+                        In order to utilize the build and livereload features of the template you need to install the following on your development computer..
+                      </p>
+                      <ul class="bullet">
+                        <li>
+                          Node.js and NPM. You can download Node.js from here
+                          <a href="https://nodejs.org/download/">
+                            https://nodejs.org/download/
+                          </a>
+                          . Npm comes bundled with Node.js
+                        </li>
+                        <li>
+                          next you need to install bower and gulp using this command
+                          <code>
+                            npm install --global bower gulp
+                          </code>
+                        </li>
+                        <li>
+                          finally run
+                          <code>
+                            npm install
+                          </code>
+                          and
+                          <code>
+                            bower install
+                          </code>
+                          from the root of your project to install all the necessary dependencies. By default bower packages will install to app/vendor.
+                        </li>
+                      </ul>
+                      <p>
+                        Once you have all tools and dependencies installed you can use this command in your project:
+                      </p>
+                      <ul class="bullet">
+                        <li>
+                          <code>
+                            gulp serve
+                          </code>
+                        </li>
+                        <li>
+                          <code>
+                            gulp build
+                          </code>
+                        </li>
+                      </ul>
+                      <p>
+                        <code>
+                          gulp serve
+                        </code>
+                        launches a localhost preview of your app (with Livereload) and will compile your sass files to css
+                      </p>
+                      <p>
+                        <code>
+                          gulp build
+                        </code>
+                        will create your production files.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- /how it works section -->
+              <!-- footer -->
+              <footer class="content-section">
+              <div class="container">
+                <div class="row text-center">
+                  <div class="col-sm-12 mb25">
+                    <small class="show">
+                      All rights reserved
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </footer>
+              <!-- /footer -->
+              <script src="scripts/app.min.5b73b68c.js">
+              </script>
+            </body>
+          </link>
+        </meta>
+      </meta>
+    </meta>
+  </head>
+</html>

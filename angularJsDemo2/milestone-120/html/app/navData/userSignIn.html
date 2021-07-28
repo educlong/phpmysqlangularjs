@@ -1,0 +1,59 @@
+<div class="card card-block form-layout" ng-form="loginDemo2"><!-- đặt ng-form cho phần login -->
+  <!-- <form role="form" action="index.html" id="validate" novalidate="novalidate"> --> <!-- dùng angular nên k cần form mà dùng ng-form-->
+    <div class="text-xs-center m-b-3">  <!-- chỉ cần có ng-form thì ng-form sẽ tự động check các trường input mà có các thuộc tính như -->
+      <img src="images/logo-icon.png" height="80" alt="" class="m-b-1"> <!-- required, type="email", type="date",... có hợp lệ hay k -->
+      <h5>  <!-- nếu hợp lệ thì <tên ng-form>.$valid sẽ trả về true, và trả về false nếu k hợp lệ -->
+        Welcome back!
+      </h5>
+      <p class="text-muted">
+        Sign in with your app id to continue.
+      </p>
+    </div>
+    <fieldset class="form-group">
+      <label for="example-email-input" class="col-form-label">
+        Enter your email
+      </label> <!-- khi đặt thuộc tính ng-form thì chỉ cần input có type="email" thì nó sẽ check input này có dạng đúng là email mới thôi -->
+      <input type="email" class="form-control form-control-lg" id="example-email-input" placeholder="bootstrap@example.com" required="" aria-required="true" ng-model="userSignIn.emailDemo2">
+    </fieldset>
+    <fieldset class="form-group">
+      <label for="password">
+        Enter your password
+      </label><!--khi đặt thuộc tính ng-form thì chỉ cần input có type="password" thì nó sẽ check input này có dạng đúng là password mới thôi-->
+      <input type="password" class="form-control form-control-lg" id="password" placeholder="********" required="" aria-required="true"  ng-model="userSignIn.passwordDemo2"><!-- lưu username và password nhập vào vào 1 mảng userSignIn để dễ quản lý (viết js để hiện button)-->
+    </fieldset>
+    <label class="custom-control custom-checkbox m-b-1">
+      <input type="checkbox" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Stay logged in</span>
+    </label>
+    <button class="btn btn-primary btn-block btn-lg" type="button" ng-click="checkLoginDemo2(userSignIn)"  ng-disabled="!loginDemo2.$valid">
+      Login <!--ng-disabled="true" -> ẩn nút đăng nhập đi, khi nào đăng nhập đúng thì mới hiện lên, ng-disabled bằng đúng ng-form và $vallid-->
+    </button> <!-- $valid dùng để check xem form này có hợp lệ hay k, nó chỉ hợp lệ khi mà email đúng dạng email và password đc gõ vào -->
+    <div class="divider"><!--ban đầu k có thông tin nhập vào thì button này sẽ có ng-disabled="true", do đó ở đây phải là !loginDemo2.$valid-->
+      <span>
+        OR
+      </span>
+    </div>
+    <div class="text-xs-center">
+      <p>
+        Login with your social account
+      </p>
+      <button href="javascript:;" class="btn btn-icon-icon btn-facebook btn-lg m-b-1 m-r-1">
+        <i class="fa fa-facebook">
+        </i>
+      </button>
+      <button href="javascript:;" class="btn btn-icon-icon btn-github btn-lg m-b-1 m-r-1">
+        <i class="fa fa-github">
+        </i>
+      </button>
+      <button href="javascript:;" class="btn btn-icon-icon btn-google btn-lg m-b-1 m-r-1">
+        <i class="fa fa-google-plus">
+        </i>
+      </button>
+      <button href="javascript:;" class="btn btn-icon-icon btn-linkedin btn-lg m-b-1 m-r-1">
+        <i class="fa fa-linkedin">  
+        </i>
+      </button>
+    </div>
+  <!-- </form> -->
+</div>

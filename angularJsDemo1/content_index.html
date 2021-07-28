@@ -1,0 +1,41 @@
+    <div ng-repeat="aDataAngDemo1 in datasAngDemo1">
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url({{aDataAngDemo1.image}})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>{{aDataAngDemo1.title}}</h1>
+                            <span class="subheading">{{aDataAngDemo1.subtitle}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div ng-repeat="aDatasContentAngDemo1 in datasContentAngDemo1">
+                        <!-- Post preview-->
+                        <div class="post-preview">
+                            <a href="post">
+                                <h2 class="post-title">{{aDatasContentAngDemo1.title}}</h2>
+                                <h3 class="post-subtitle">{{aDatasContentAngDemo1.subtitle}}</h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by
+                                <a href="#!">{{aDatasContentAngDemo1.author}}</a>
+                                on {{aDatasContentAngDemo1.date | date}} 
+                            </p>
+                        </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                    </div>
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
