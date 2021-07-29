@@ -15,17 +15,126 @@
 		(VD: thay vì gõ 	http://127.0.0.1:8888/phpBasic4/AttributeHomejson/detailsMenu/10/hoc081098
 			 thì chỉ cần gõ	http://127.0.0.1:8888/phpBasic4/hoc081098)
 
-	PHẦN XỬ LÝ GỬI MAIL (cần require load đến library -> xem tại line 12): search library "phpmailer github" => download 4 file bao gồm: 
+	PHẦN XỬ LÝ GỬI MAIL (cần require load đến library): search library "phpmailer github" => download 4 file bao gồm: 
+		1. class phpmailer
+		2. class pop3
+		3. class smtp
+		4. phpmailerautoload
+	Copy 4 file này vào controllers/PHPmailer/src
+*/
+
+/*PHẦN XỬ LÝ SEND EMAIL và ĐẶT BÀN NHÀ HÀNG */
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
+
+class AttributeHomejson extends CI_Controller {
+
+
+/**/	/*ĐẶT BÀN NHÀ HÀNG (PHẦN XỬ LÝ MAILER)*/
+/**/
+/**//*PHẦN XỬ LÝ GỬI MAIL (cần require load đến library -> xem tại line 12): search library "phpmailer github" => download 4 file bao gồm: 
 		1. class phpmailer
 		2. class pop3
 		3. class smtp
 		4. phpmailerautoload
 	Copy 4 file này vào controllers/mail
-*/
+	*/
+/**/
+/**/// thông tin từ view
+/**/private $fieldsFromHomeViewBookingTable=array("nameBooking","emailBooking","phoneBooking","dateBooking","timeBooking","numberBooking");
+/**/// các trường trong cột valueAttribute của database
+/**/private $fieldsInValueBookingTable = array("name", "email", "phone", "date", "time", "number");
+/**/
+/**/
+/**/function sendingEmail()	/*copy từ github phpmailer*/
+/**/{
+/**/	/*trước khi config cho gửi mail => cần xác minh 2 bước cho tài khoản gmail gửi đi (educlong@gmail.com)
+		 search từ khóa: security gmail
+		 Sau khi xác minh 2 bước, gmail sẽ gửi zề 1 password -> điền pass vào $mail->Password*/
+/**/
+/**/	//Instantiation and passing `true` enables exceptions
+/**/	
+/**/    $mail = new PHPMailer(true);
+/**/    $mail->CharSet = "utf-8";
+/**/
+/**/	try {
+/**/	    //Server settings
+/**/	    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+/**/	    $mail->isSMTP();                                            //Send using SMTP
+/**/	    $mail->Host       = 'smtp.gmail.com';				/*Host của gmail*/
+/**/	    $mail->SMTPAuth   = true;                           //Enable SMTP authentication
+/**/	    $mail->Username   = 'educlong@gmail.com';           //SMTP username (gửi từ) -> user k nhìn thấy email này
+/**/	    $mail->Password   = 'dyeycmeisxlmnyan';                               //SMTP password
+/**/	    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+/**/	    $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+/**/
+/**/	    //Recipients
+/**/	    $mail->setFrom('founder@elongcenter.com', 'Trung tâm đào tạo elong');			  /*gửi từ (user nhìn thấy email này*/
+/**/	    $mail->addAddress("lloonnggg@gmail.com",$this->input->post($this->fieldsFromHomeViewBookingTable[0]));/*đến*/
+/**/	    // $mail->addAddress('ellen@example.com');               //Name is optional
+/**/	    // $mail->addReplyTo('info@example.com', 'Information');
+/**/	    // $mail->addCC('cc@example.com');
+/**/	    // $mail->addBCC('bcc@example.com');
+/**/
+/**/	    //Attachments
+/**/	    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+/**/	    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+/**/
+/**/	    //Content
+/**/	    $mail->isHTML(true);                                  //Set email format to HTML
+/**/	    $mail->Subject = "Thông báo booking table ".$this->input->post($this->fieldsFromHomeViewBookingTable[4]).
+/**/	    									   ", ".$this->input->post($this->fieldsFromHomeViewBookingTable[3]).
+/**/	    							 ". Số lượng: ".$this->input->post($this->fieldsFromHomeViewBookingTable[5]);	/*tiêu đề mail*/
+/**/	    $mail->Body    = "Thông tin đặt bàn: ".
+/**/	    	"\n 1. Tên khách hàng: ".$this->input->post($this->fieldsFromHomeViewBookingTable[0]).
+/**/	    	"\n 2. Email: ".$this->input->post($this->fieldsFromHomeViewBookingTable[1]).
+/**/	    	"\n 3. Phone: ".$this->input->post($this->fieldsFromHomeViewBookingTable[2]).
+/**/	    	"\n 4. Ngày zờ: ".$this->input->post($this->fieldsFromHomeViewBookingTable[4]).", "
+/**/	    					.$this->input->post($this->fieldsFromHomeViewBookingTable[3]).
+/**/	    	"\n 5. Số lượng: ".$this->input->post($this->fieldsFromHomeViewBookingTable[5]);							/*body mail*/
+/**/	    // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+/**/	    
+/**/	    if ($mail->send()){
+/**/	    	echo 'Message has been sent';
+/**/	    }
+/**/	} catch (Exception $e) {
+/**/	    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+/**/	}
+/**/}
+/**/
+/**/
+/**/public function insertBookingTable()	/*insert vào db sau đó send email*/
+/**/{
+/**/	// echo($this->fieldsFromHomeViewBookingTable[1]);
+/**/	$selectAllDataBooking = json_decode($this->AttributejsonModel->selectAttributeModel($this->nameAttribute[1]),true);
+/**/	if ($selectAllDataBooking==null)
+/**/		$selectAllDataBooking = array();	/*nếu k có data thì khởi tạo mảng mới*/
+/**/	$dataBookingElement = array(
+/**/		$this->fieldsInValueBookingTable[0] => $this->input->post($this->fieldsFromHomeViewBookingTable[0]),
+/**/		$this->fieldsInValueBookingTable[1] => $this->input->post($this->fieldsFromHomeViewBookingTable[1]),
+/**/		$this->fieldsInValueBookingTable[2] => $this->input->post($this->fieldsFromHomeViewBookingTable[2]),
+/**/		$this->fieldsInValueBookingTable[3] => $this->input->post($this->fieldsFromHomeViewBookingTable[3]),
+/**/		$this->fieldsInValueBookingTable[4] => $this->input->post($this->fieldsFromHomeViewBookingTable[4]),
+/**/		$this->fieldsInValueBookingTable[5] => $this->input->post($this->fieldsFromHomeViewBookingTable[5])
+/**/	);
+/**/	array_push($selectAllDataBooking, $dataBookingElement);
+/**/	if ($this->AttributejsonModel->updateAttributeModel($this->nameAttribute[1], json_encode($selectAllDataBooking))){
+/**/		$this->sendingEmail();	
+/**/	}
+/**/	else echo 'fail';
+/**/}
+/**/
 
 
 
-class AttributeHomejson extends CI_Controller {
+
 	private $model = 'AttributejsonModel';
 
 	public function __construct()

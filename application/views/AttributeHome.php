@@ -257,6 +257,88 @@
 
 
 
+
+<!--  -->    <!-- ĐẶT BÀN NHÀ HÀNG  (MỤC XỬ LÝ MAILER)-->
+    <div class="container" style="margin-top: 20px">
+<!-- --><div class="row text-center">
+<!-- -->    <div>Thông tin đặt bàn</div>
+<!-- --></div>
+<!-- --><form action="AttributeHomejson/insertBookingTable" method="POST" enctype="multipart/form-data">
+<!-- -->    <div class="row">
+<!-- -->        <div class="col-sm-4">
+<!-- -->            <div class="form-group row">
+<!-- -->                <div class="col-sm-12">
+<!-- -->                    <input type="text" class="form-control" name="nameBooking" id="inputNameBooking" placeholder="Your Name *">
+<!-- -->                </div>
+<!-- -->            </div>
+<!-- -->            <div class="form-group row">
+<!-- -->                <div class="col-sm-12">
+<!-- -->                    <input type="date" class="form-control" name="dateBooking" id="inputDateBooking" placeholder="MM/dd/yyyy">
+<!-- -->                </div>
+<!-- -->            </div>
+<!-- -->        </div>  <!-- end col-sm-4 -->
+<!-- -->        <div class="col-sm-4">
+<!-- -->            <div class="form-group row">
+<!-- -->                <div class="col-sm-12">
+<!-- -->                    <input type="email" class="form-control" name="emailBooking" id="inputEmailBooking" placeholder="Your Email *">
+<!-- -->                </div>
+<!-- -->            </div>
+<!-- -->            <div class="form-group row">
+<!-- -->                <div class="col-sm-12">
+<!-- -->                    <input type="time" class="form-control" name="timeBooking" id="inputTimeBooking" placeholder="--:-- --">
+<!-- -->                </div>
+<!-- -->            </div>
+<!-- -->        </div>  <!-- end col-sm-4 -->
+<!-- -->        <div class="col-sm-4">
+<!-- -->            <div class="form-group row">
+<!-- -->                <div class="col-sm-12">
+<!-- -->                    <input type="number" class="form-control" name="phoneBooking" id="inputPhoneBooking" placeholder="Your Mobile *">
+<!-- -->                </div>
+<!-- -->            </div>
+<!-- -->            <div class="form-group row">
+<!-- -->                <div class="col-sm-12">
+<!-- -->                    <input type="number" class="form-control" name="numberBooking" id="inputNumberBooking" placeholder="No. of person *">
+<!-- -->                </div>
+<!-- -->            </div>
+<!-- -->        </div>  <!-- end col-sm-4 -->
+<!-- -->    </div>
+<!-- -->    <div class="row text-center">
+<!-- -->        <div class="form-group row">
+<!-- -->            <div class="text-center">
+<!-- -->                <input type="submit" class="btn btn-outline-primary" value="Send Email">
+<!-- -->            </div>
+<!-- -->        </div>  <!-- end submit -->
+<!-- -->    </div>
+<!-- --></form> <!-- end form action AttributeHomejson/sendingEmail -->
+    </div>  <!-- end container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- XỬ LÝ PHẦN DANH MỤC TIN TỨC -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-inverse col-12"> <!--navbar -> tab-->
                 <!--tips: to change the nav placement use .fixed-top,.fixed-bottom,.sticky-top-->
