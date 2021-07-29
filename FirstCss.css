@@ -493,7 +493,7 @@ h5.red {
     border-bottom: 1px solid gray;
     padding: 10px 0;
 }
-.container.displayList.columnList .displayElement{
+.container.displayList.rowList .displayElement{
     width: 31%;
     margin-right: 2%;
     float: left;
