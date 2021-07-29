@@ -457,7 +457,10 @@ nav .backgroundMenuDemo6 ul li .row  div.btn.btn-primary  {
     background: darkgrey;
 }
 
-
+nav ul.pagination li .page-link a{
+    padding: 8px 16px;
+    margin: -13px;
+}
 
 
 
@@ -539,3 +542,5 @@ input.ng-invalid.ng-invalid-email.ng-valid-email-add.ng-invalid-email-remove{
     background: red;
     color: white;
 }
+
+
