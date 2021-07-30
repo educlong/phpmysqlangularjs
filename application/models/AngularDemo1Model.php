@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AttributejsonModel extends CI_Model {
+class AngularDemo1Model extends CI_Model {
 
 	public $variable;
 
@@ -9,13 +9,6 @@ class AttributejsonModel extends CI_Model {
 		parent::__construct();
 		
 	}
-
-	/*CÓ THỂ SỬ DỤNG PHÍM TẮT ĐỂ XỔ RA CODE TƯƠNG TÁC VS DATABASE (SELECT, INSERT, UPDATE, DELETE)
-
-	Gõ ci2me -> tab (hoặc ctrl+space)	*/
-
-
-
 
 
 
@@ -55,7 +48,6 @@ class AttributejsonModel extends CI_Model {
 	{
 
 		$nameAtri = json_decode($this->selectAttributeModel($infoInColumnNameAttribute),true);
-
 		$selectAttributeNoDelete = array();
 		foreach ($nameAtri as $key => $value) {
 			if ($value[$fieldsInValueAttribute[count($fieldsInValueAttribute)-1]] == $this->isDelete[0] ) {
@@ -69,7 +61,28 @@ class AttributejsonModel extends CI_Model {
 		}
 		return json_encode($selectAttributeNoDelete);
 	}
-	
+	public function increaseIdAttributeModel($infoInColumnNameAttribute)	/*trường id trong valueAttribute tự động tăng*/
+	{
+		$id=1;
+		foreach (json_decode($this->selectAttributeModel($infoInColumnNameAttribute), true) as $key => $value) {
+			if ($value[$this->columnValueAttributeFieldId] >= $id) {
+				$id++;
+			}
+		}
+		return $id;
+	}
+
+	public function checkingIdModel($infoInColumnNameAttribute, Array $fieldsInValueAttribute, $idAttribute)
+	{
+		$nameAtri = json_decode($this->selectAttributeModel($infoInColumnNameAttribute),true);
+		foreach ($nameAtri as $key => $value) {
+			if ($idAttribute == $value[$fieldsInValueAttribute[0]]) {	/*Nếu trùng id => return false, ko trùng id => return true*/
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public function insertAttributeModel($nameAttribute, $valueAttribute)		/*$attribute này đã đc mã hóa (json_encode)*/
 	{	/*insert $nameAttribute vào cột nameAttribute ($this->$columnNameAttribute) */
 		$this->db->insert($this->tableDatabase, 	/*và $valueAttribute vào cột valueAttribute ($this->columnValueAttribute)*/
@@ -86,12 +99,4 @@ class AttributejsonModel extends CI_Model {
 	} /*tạo mảng để update data update cả mảng, vs nameAttribute="topBannerSlide", và valueAttribute=...(là 1 chuỗi dữ liệu json)*/
 
 
-
-
-
-	
-	        
 }
-
-/* End of file mainjsonModel.php */
-/* Location: ./application/models/mainjsonModel.php */
